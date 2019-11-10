@@ -28,7 +28,7 @@ SectionEnd
 setup_files = ""
 for file in os.listdir("PureWriter"):
     if os.path.isdir("PureWriter\\" + file):
-        setup_files += '    File \\r "PureWriter\\' + file + '"\n'
+        setup_files += '    File /r "PureWriter\\' + file + '"\n'
     else:
         setup_files += '    File "PureWriter\\' + file + '"\n'
 
