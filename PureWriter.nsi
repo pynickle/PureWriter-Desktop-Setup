@@ -1,3 +1,5 @@
+!include "MUI.nsh"
+
 Name "Pure Writer"
 OutFile "PureWriter-Setup.exe"
 InstallDir "$PROGRAMFILES\PureWriter"
@@ -5,12 +7,27 @@ Icon "PureWriter.ico"
 
 Page license
 Page directory
-Page instfiles 
+Page instfiles
+
+Function .onInit
+	Push ""
+	Push ${LANG_ENGLISH}
+	Push English
+	Push ${LANG_SIMPCHINESE}
+	Push "Simplified Chinese"
+	Push A ; A means auto count languages
+	       ; for the auto count to work the first empty push (Push "") must remain
+	LangDLL::LangDialog "Installer Language" "Please select the language of the installer"
+
+	Pop $LANGUAGE
+	StrCmp $LANGUAGE "cancel" 0 +2
+		Abort
+FunctionEnd
+
 UninstPage uninstConfirm
 UninstPage instfiles
 LicenseText "LICENSE For PureWriter"
 LicenseData "PureWriter-LICENSE"
-LoadLanguageFile "${NSISDIR}/Contrib/Language files/SimpChinese.nlf"
 
 Section "" ; Setup
     SetOutPath $INSTDIR
