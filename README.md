@@ -4,9 +4,8 @@ Pure Writer Desktop: [drakeet/desktop](https://github.com/PureWriter/desktop)
 
 ## Setup
 
-**requirements**: python, NSIS
+**requirements**: NSIS
 
 ```bash
-python make-setup.py
 makensis PureWriter.nsi
 ```

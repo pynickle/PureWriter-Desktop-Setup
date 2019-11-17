@@ -29,11 +29,20 @@ UninstPage instfiles
 LicenseText "LICENSE For PureWriter"
 LicenseData "PureWriter-LICENSE"
 
-Section Setup
+Section "Setup" ; Setup
     SetOutPath $INSTDIR
     File /r "PureWriter"
 
     WriteRegStr HKLM "SOFTWARE\PureWriter" "Install_Dir" "$INSTDIR"
     CreateShortCut "$Desktop\PureWriter.lnk" "$INSTDIR\PureWriter\Pure Writer.exe"
     CreateShortCut "$SMPROGRAMS\PureWriter.lnk" "$INSTDIR\PureWriter\Pure Writer.exe"
+
+    WriteUninstaller "$INSTDIR\PureWriter\uninstaller.exe"
+SectionEnd
+
+Section "Uninstall" ; Uninstall
+    DeleteRegKey HKLM "SOFTWARE\PureWriter"
+    Delete "$Desktop\PureWriter.lnk"
+    Delete "$INSTDIR\uninstaller.exe"
+    RMDir /r $INSTDIR
 SectionEnd
